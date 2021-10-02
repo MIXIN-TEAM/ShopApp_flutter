@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
-import 'package:shop_app_mixin/core/services/home_service.dart';
+import 'package:shop_app_mixin/core/services/firestore_home.dart';
 import 'package:shop_app_mixin/model/category_model.dart';
 import 'package:shop_app_mixin/model/product_model.dart';
 

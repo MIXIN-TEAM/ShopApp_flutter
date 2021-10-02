@@ -1,5 +1,5 @@
 class UserModel {
-  late String? userId, email, name, pic;
+  late String userId, email, name, pic;
 
   UserModel({
     required this.userId,
@@ -7,6 +7,7 @@ class UserModel {
     required this.name,
     required this.pic,
   });
+  
   UserModel.fromJson(Map<dynamic, dynamic> map) {
     userId = map['userId'];
     email = map['email'];

@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:shop_app_mixin/constance.dart';
 import 'package:shop_app_mixin/core/viewmodel/home_view_model.dart';
+import 'package:shop_app_mixin/view/categories_products_view.dart';
 import 'package:shop_app_mixin/view/details_view.dart';
+import 'package:shop_app_mixin/view/search_view.dart';
 
 // ignore: must_be_immutable
 class HomeView extends StatelessWidget {
@@ -14,64 +17,75 @@ class HomeView extends StatelessWidget {
       builder: (controller) => controller.loading.value
           ? Center(child: CircularProgressIndicator())
           : Scaffold(
-              backgroundColor: Color(0x4DC4C4C4),
+              // backgroundColor: Color(0x4DC4C4C4),
+              backgroundColor: Color(0xFFEEEEEE),
               appBar: AppBar(
                 backgroundColor: Color(0xFF4179A2),
                 elevation: 0,
               ),
               body: SingleChildScrollView(
-                child: Container(
-                  child: Padding(
-                    padding: EdgeInsets.only(
-                      top: 14,
-                      right: 14,
-                      left: 14,
+                padding: EdgeInsets.only(
+                  top: 30.h,
+                  bottom: 14.h,
+                  right: 16.w,
+                  left: 16.w,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _searchTextFormField(),
+                    SizedBox(
+                      height: 25.h,
                     ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                    Text(
+                      'Categories',
+                      style: TextStyle(
+                        color: Color(0xFF33383A),
+                        fontSize: 20.sp,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 19.h,
+                    ),
+                    _listViewCategory(),
+                    SizedBox(
+                      height: 25.h,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        _searchTextFormField(),
-                        SizedBox(
-                          height: 20,
-                        ),
                         Text(
-                          'Categories',
+                          'Best Selling',
                           style: TextStyle(
-                            color: Color(0xFF33383A),
-                            fontSize: 20,
+                            fontSize: 19.sp,
                             fontWeight: FontWeight.w600,
                           ),
                         ),
-                        SizedBox(
-                          height: 10,
+                        // GestureDetector(
+                        //   onTap: () {
+                        //     Get.to(
+                        //       CategoryProductsView(
+                        //         categoryName: 'Best Selling',
+                        //         products: controller.productModel,
+                        //       ),
+                        //     );
+                        //   },
+                        // ),
+                        Text(
+                          'See all',
+                          style: TextStyle(
+                            fontSize: 19.sp,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
-                        _listViewCategory(),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Best Selling',
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                            Text(
-                              'See all',
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        _listViewProducts(),
                       ],
                     ),
-                  ),
+                    SizedBox(
+                      height: 15.h,
+                    ),
+                    _listViewProducts(),
+                  ],
                 ),
               ),
             ),
@@ -80,11 +94,15 @@ class HomeView extends StatelessWidget {
 
   Widget _searchTextFormField() {
     return Container(
+      height: 49.h,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(18),
+        borderRadius: BorderRadius.circular(18.r),
         color: Colors.white,
       ),
       child: TextFormField(
+        onFieldSubmitted: (value) {
+          Get.to(SearchView(value));
+        },
         decoration: InputDecoration(
           hintText: 'search...',
           border: InputBorder.none,
@@ -100,39 +118,56 @@ class HomeView extends StatelessWidget {
   Widget _listViewCategory() {
     return GetBuilder<HomeViewModel>(
       builder: (controller) => Container(
-        height: 80,
+        height: 80.h,
         child: ListView.separated(
           separatorBuilder: (BuildContext context, int index) => SizedBox(
-            width: 20,
+            width: 20.w,
           ),
           itemCount: controller.categoryModel.length,
           scrollDirection: Axis.horizontal,
           itemBuilder: (BuildContext context, int index) {
-            return Column(
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.white,
-                  ),
-                  height: 50,
-                  width: 50,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Image.network(
-                      controller.categoryModel[index].image,
+            return GestureDetector(
+              onTap: () {
+                Get.to(CategoryProductsView(
+                  categoryName: controller.categoryModel[index].name,
+                  products: controller.productModel
+                      .where((product) =>
+                          product.category ==
+                          controller.categoryModel[index].name.toLowerCase())
+                      .toList(),
+                ));
+              },
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Material(
+                    borderRadius: BorderRadius.circular(50.r),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10.r),
+                        color: Colors.white,
+                      ),
+                      height: 60.h,
+                      width: 60.w,
+                      child: Padding(
+                        padding: EdgeInsets.all(12.h),
+                        child: Image.network(
+                          controller.categoryModel[index].image,
+                        ),
+                      ),
                     ),
                   ),
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                Text(
-                  controller.categoryModel[index].name,
-                  //TODO:add text style
-                  style: TextStyle(),
-                ),
-              ],
+                  // SizedBox(
+                  //   height: 5,
+                  // ),
+                  Text(
+                    controller.categoryModel[index].name,
+                    style: TextStyle(
+                      fontSize: 14.sp,
+                    ),
+                  ),
+                ],
+              ),
             );
           },
         ),
@@ -143,86 +178,64 @@ class HomeView extends StatelessWidget {
   Widget _listViewProducts() {
     return GetBuilder<HomeViewModel>(
       builder: (controller) => Container(
-        height: 350,
+        height: 320.h,
         child: ListView.separated(
           separatorBuilder: (BuildContext context, int index) => SizedBox(
-            width: 20,
+            width: 15.w,
           ),
           itemCount: controller.productModel.length,
           scrollDirection: Axis.horizontal,
           itemBuilder: (BuildContext context, int index) {
-            return Container(
-              width: MediaQuery.of(context).size.width * 0.4,
-              child: Column(
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      Get.to(
-                        () => DetailsView(
-                          model: controller.productModel[index],
-                        ),
-                      );
-                    },
-                    child: Container(
+            return GestureDetector(
+              onTap: () {
+                Get.to(
+                  () => DetailsView(
+                    controller.productModel[index],
+                  ),
+                );
+              },
+              child: Container(
+                width: 164.w,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(25.r),
                         color: Colors.white,
                       ),
-                      child: Container(
-                        width: MediaQuery.of(context).size.width * 0.4,
-                        height: 200,
-                        child: Column(
-                          children: [
-                            Expanded(
-                              flex: 1,
-                              child: Image.network(
-                                controller.productModel[index].image,
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(left: 10),
-                              child: Align(
-                                alignment: Alignment.bottomLeft,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      controller.productModel[index].name,
-                                      style: TextStyle(
-                                        fontSize: 19,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                      maxLines: 1,
-                                    ),
-                                    Text(
-                                      controller
-                                          .productModel[index].description,
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w600,
-                                        color: Colors.grey.shade600,
-                                      ),
-                                      maxLines: 1,
-                                    ),
-                                    Text(
-                                      '${controller.productModel[index].price.toString()} DZD',
-                                      style: TextStyle(
-                                        fontSize: 23,
-                                        fontWeight: FontWeight.w600,
-                                        color: Color(0xFF2E9AEB),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
+                      height: 220.h,
+                      width: 164.w,
+                      child: Image.network(
+                        controller.productModel[index].image,
+                        fit: BoxFit.contain,
                       ),
                     ),
-                  ),
-                ],
+                    Text(
+                      controller.productModel[index].name,
+                      style: TextStyle(
+                        fontSize: 16.sp,
+                      ),
+                    ),
+                    Text(
+                      controller.productModel[index].description,
+                      style: TextStyle(
+                        fontSize: 12.sp,
+                        color: Colors.grey,
+                      ),
+                      maxLines: 1,
+                    ),
+                    Text(
+                      'DZD${controller.productModel[index].price}',
+                      style: TextStyle(
+                        fontSize: 18.sp,
+                        fontWeight: FontWeight.w600,
+                        color: Kprimarycolor,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             );
           },

@@ -64,17 +64,18 @@ class RegisterScreen extends GetWidget<AuthViewModel> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     TextFieldContainer(
-                      hintext: 'Name',
+                      hintText: 'Name',
                       keyboardType: TextInputType.text,
                       onSaved: (value) {
                         controller.name = value!;
-                      }, obscureText: false,
+                      },
+                      obscureText: false,
                     ),
                     SizedBox(
                       height: 25,
                     ),
                     TextFieldContainer(
-                      hintext: 'Email',
+                      hintText: 'Email',
                       keyboardType: TextInputType.emailAddress,
                       onSaved: (value) {
                         controller.email = value!;
@@ -83,13 +84,14 @@ class RegisterScreen extends GetWidget<AuthViewModel> {
                         if (value == null) {
                           print('Error');
                         }
-                      }, obscureText: false,
+                      },
+                      obscureText: false,
                     ),
                     SizedBox(
                       height: 25,
                     ),
                     TextFieldContainer(
-                      hintext: 'Password',
+                      hintText: 'Password',
                       keyboardType: TextInputType.text,
                       onSaved: (value) {
                         controller.password = value!;
@@ -98,19 +100,24 @@ class RegisterScreen extends GetWidget<AuthViewModel> {
                         if (value == null) {
                           print('Error');
                         }
-                      }, obscureText: true,
+                      },
+                      obscureText: true,
                     ),
                     SizedBox(
                       height: 25,
                     ),
                     TextFieldContainer(
-                      hintext: 'Confirm Password',
+                      hintText: 'Confirm Password',
                       keyboardType: TextInputType.text,
+                      onSaved: (value) {
+                        controller.password = value!;
+                      },
                       validator: (value) {
                         if (value == null || value != controller.password) {
                           print('Error');
                         }
-                      }, obscureText: true,
+                      },
+                      obscureText: true,
                     ),
                     SizedBox(
                       height: 10,
@@ -132,8 +139,8 @@ class RegisterScreen extends GetWidget<AuthViewModel> {
                       height: 20,
                     ),
                     ValidationButton(
-                      text: 'Sign up',
-                      onPress: () {
+                      'Sign up',
+                      () {
                         _formkey.currentState!.save();
                         if (_formkey.currentState!.validate()) {
                           controller.createUserWithEmailAndPassword();

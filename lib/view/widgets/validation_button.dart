@@ -3,13 +3,12 @@ import 'package:flutter/material.dart';
 import '../../constance.dart';
 
 class ValidationButton extends StatelessWidget {
-  final String text;
-  final void Function()? onPress;
-  const ValidationButton({
-    Key? key,
-    required this.text,
-    required this.onPress,
-  }) : super(key: key);
+  final String? text;
+  final VoidCallback? onPress;
+  ValidationButton(
+    this.text,
+    this.onPress,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +21,7 @@ class ValidationButton extends StatelessWidget {
             9,
           ),
         ),
-        minimumSize: Size(
+        maximumSize: Size(
           180,
           50,
         ),
@@ -34,7 +33,7 @@ class ValidationButton extends StatelessWidget {
           horizontal: MediaQuery.of(context).size.width * 0.1,
         ),
         child: Text(
-          text,
+          text!,
           style: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.w600,

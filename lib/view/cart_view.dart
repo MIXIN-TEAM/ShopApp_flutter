@@ -1,12 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:shop_app_mixin/constance.dart';
 import 'package:shop_app_mixin/core/viewmodel/cart_view_model.dart';
-// import 'package:shop_app_mixin/view/checkout_view.dart';
+import 'package:shop_app_mixin/view/checkout_view.dart';
 import 'package:shop_app_mixin/view/widgets/validation_button.dart';
 
 class CartView extends StatelessWidget {
@@ -15,29 +16,34 @@ class CartView extends StatelessWidget {
     return GetBuilder<CartViewModel>(
       init: Get.put(CartViewModel()),
       builder: (controller) => Scaffold(
+        // backgroundColor: Color(0x4DC4C4C4),
+        backgroundColor: Color(0xFFEEEEEE),
         body: controller.cartProductModel.length == 0
-            ? Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    SvgPicture.asset(
-                      'assets/svg/empty.svg',
-                      height: 250,
-                      width: 250,
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Text(
-                      'Empty cart',
-                      style: TextStyle(
-                        fontSize: 25,
-                        fontWeight: FontWeight.w600,
-                        color: Kprimarycolor,
+            ? Scaffold(
+                backgroundColor: Color(0xFFEEEEEE),
+                body: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      SvgPicture.asset(
+                        'assets/svg/empty.svg',
+                        height: 250,
+                        width: 250,
                       ),
-                    )
-                  ],
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text(
+                        'Empty cart',
+                        style: TextStyle(
+                          fontSize: 25,
+                          fontWeight: FontWeight.w600,
+                          color: Kprimarycolor,
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               )
             : Column(
@@ -52,7 +58,25 @@ class CartView extends StatelessWidget {
                       child: ListView.separated(
                         itemCount: controller.cartProductModel.length,
                         itemBuilder: (BuildContext context, int index) {
-                          return Container(
+                          return Dismissible(
+                            key: Key(
+                                controller.cartProductModel[index].productId),
+                            background: Container(
+                              color: Colors.red,
+                              alignment: Alignment.centerRight,
+                              padding: EdgeInsets.only(right: 33.w),
+                              child: Icon(
+                                Icons.delete_forever,
+                                color: Colors.white,
+                                size: 40,
+                              ),
+                            ),
+                            onDismissed: (direction) {
+                              if (direction == DismissDirection.endToStart) {
+                                controller.removeProduct(controller
+                                    .cartProductModel[index].productId);
+                              }
+                            },
                             child: Row(
                               children: [
                                 Container(
@@ -169,14 +193,14 @@ class CartView extends StatelessWidget {
                         },
                         separatorBuilder: (BuildContext context, int index) {
                           return SizedBox(
-                            height: 5,
+                            height: 5.h,
                           );
                         },
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 5),
+                  Material(
+                    elevation: 12,
                     child: Container(
                       color: Colors.white,
                       child: Row(
@@ -208,9 +232,9 @@ class CartView extends StatelessWidget {
                             ],
                           ),
                           ValidationButton(
-                            text: 'Check out',
-                            onPress: () {
-                              // Get.to(() => CheckOutView());
+                            'Check out',
+                            () {
+                              Get.to(() => CheckoutView());
                             },
                           ),
                         ],

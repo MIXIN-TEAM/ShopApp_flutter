@@ -1,135 +1,122 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:shop_app_mixin/constance.dart';
+import 'package:shop_app_mixin/core/viewmodel/auth_view_model.dart';
 import 'package:shop_app_mixin/core/viewmodel/profile_view_model.dart';
-import 'package:shop_app_mixin/view/auth/welcome_screen.dart';
+import 'package:shop_app_mixin/view/profile/cards_view.dart';
+import 'package:shop_app_mixin/view/profile/edit_profile_view.dart';
+import 'package:shop_app_mixin/view/profile/notifications_view.dart';
+import 'package:shop_app_mixin/view/profile/order_history_view.dart';
 import 'package:shop_app_mixin/view/widgets/tile_list.dart';
 
 class ProfileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<ProfileViewModel>(
+    return Scaffold(
+      backgroundColor: Color(0xFFEEEEEE),
+      body: GetBuilder<ProfileViewModel>(
         init: ProfileViewModel(),
         builder: (controller) => controller.loading.value
             ? Center(
                 child: CircularProgressIndicator(),
               )
-            : Scaffold(
-                body: SafeArea(
-                  child: Container(
-                    padding: EdgeInsets.only(left: 10, top: 20),
-                    child: SingleChildScrollView(
-                      child: Column(
-                        // mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Container(
-                            child: Column(
+            : SingleChildScrollView(
+                child: Padding(
+                  padding: EdgeInsets.only(
+                    left: 10.w,
+                    top: 20.h,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(
+                        padding: EdgeInsets.only(
+                          top: 40.h,
+                          right: 16.w,
+                          left: 16.w,
+                        ),
+                        child: Column(
+                          children: [
+                            CircleAvatar(
+                              radius: 60.h,
+                              backgroundImage:
+                                  AssetImage('assets/images/avatar.png'),
+                              foregroundImage: controller.currentUser!.pic !=
+                                      'default'
+                                  ? NetworkImage(controller.currentUser!.pic)
+                                  : null,
+                            ),
+                            SizedBox(
+                              height: 10.h,
+                            ),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                Container(
-                                  height:
-                                      MediaQuery.of(context).size.width * 0.3,
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.3,
-                                  decoration: BoxDecoration(
-                                    color: Colors.grey,
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(100),
-                                    ),
-                                    image: DecorationImage(
-                                      // ignore: unnecessary_null_comparison
-                                      image: AssetImage(
-                                        'assets/images/avatar.png',
-                                      ),
-                                      // controller.userModel.[] as ImageProvider,
-                                      // == null
-                                      //     ? AssetImage(
-                                      //         'assets/images/avatar.png',
-                                      //       )
-                                      //     : controller.userModel.pic ==
-                                      //             'default'
-                                      //         ? AssetImage(
-                                      //             'assets/images/avatar.png')
-                                      //         : NetworkImage(
-                                      //             controller.userModel.pic!,
-                                      //           ) as ImageProvider,
-                                      fit: BoxFit.fill,
-                                    ),
+                                Text(
+                                  controller.currentUser!.name,
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w600,
+                                    color: Ksecondarycolor,
                                   ),
                                 ),
                                 SizedBox(
-                                  height: 10,
+                                  height: 5.h,
                                 ),
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      controller.userModel.name == null
-                                          ? 'user'
-                                          : controller.userModel.name!,
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w600,
-                                        color: Ksecondarycolor,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                    Text(
-                                      controller.userModel.email == null
-                                          ? 'user'
-                                          : controller.userModel.email!,
-                                      style: TextStyle(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w600,
-                                        color: Ksecondarycolor,
-                                      ),
-                                    ),
-                                  ],
+                                Text(
+                                  controller.currentUser!.email,
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w600,
+                                    color: Ksecondarycolor,
+                                  ),
                                 ),
                               ],
                             ),
-                          ),
-                          SizedBox(
-                            height: 50,
-                          ),
-                          Tile(
-                            image: 'assets/svg/edit.svg',
-                            text: 'Edit Profile',
-                          ),
-                          Tile(
-                            image: 'assets/svg/location.svg',
-                            text: 'Shipping Address',
-                          ),
-                          Tile(
-                            image: 'assets/svg/history.svg',
-                            text: 'Order History',
-                          ),
-                          Tile(
-                            image: 'assets/svg/card.svg',
-                            text: 'Cards',
-                          ),
-                          Tile(
-                            image: 'assets/svg/notification.svg',
-                            text: 'Notifications',
-                          ),
-                          Tile(
-                            image: 'assets/svg/logout.svg',
-                            text: 'Log Out',
-                            onPressed: () {
-                              controller.singOut();
-                              Get.offAll(
-                                WelcomScreen(),
-                              );
-                            },
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
+                      SizedBox(
+                        height: 50,
+                      ),
+                      Tile(
+                        image: 'assets/svg/edit.svg',
+                        text: 'Edit Profile',
+                        onPressed: () => Get.to(() => EditProfileView()),
+                      ),
+                      Tile(
+                        image: 'assets/svg/location.svg',
+                        text: 'Shipping Address',
+                      ),
+                      Tile(
+                        image: 'assets/svg/history.svg',
+                        text: 'Order History',
+                        onPressed: () => Get.to(() => OrderHistoryView()),
+                      ),
+                      Tile(
+                        image: 'assets/svg/card.svg',
+                        text: 'Cards',
+                        onPressed: () => Get.to(() => CardsView()),
+                      ),
+                      Tile(
+                        image: 'assets/svg/notification.svg',
+                        text: 'Notifications',
+                        onPressed: () => Get.to(() => NotificationsView()),
+                      ),
+                      Tile(
+                        image: 'assets/svg/logout.svg',
+                        text: 'Log Out',
+                        onPressed: () {
+                          Get.find<AuthViewModel>().singOut();
+                        },
+                      ),
+                    ],
                   ),
                 ),
-              ));
+              ),
+      ),
+    );
   }
 }

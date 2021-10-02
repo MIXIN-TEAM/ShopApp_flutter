@@ -25,11 +25,6 @@ class ControlViewModel extends GetxController {
           currentScreen = CartView();
           break;
         }
-      // case 2:
-      //   {
-      //     currentScreen = FavoriteView();
-      //     break;
-      //   }
       case 2:
         {
           currentScreen = ProfileView();

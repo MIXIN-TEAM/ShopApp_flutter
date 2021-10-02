@@ -1,5 +1,4 @@
 import 'package:path/path.dart';
-import 'package:shop_app_mixin/constance.dart';
 import 'package:shop_app_mixin/model/cart_product_model.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -22,46 +21,58 @@ class CartDatabaseHelper {
     return await openDatabase(path, version: 1,
         onCreate: (Database db, int version) async {
       await db.execute('''
-      CREATE TABLE $tableCartProduct (
-        $columnName TEXT NOT NULL,
-        $columnImage TEXT NOT NULL,
-        $columnPrice TEXT NOT NULL,
-        $columnQuantity INTEGER NOT NULL,
-        $columnProductId TEXT NOT NULL
+      CREATE TABLE cartProduct (
+        name TEXT NOT NULL,
+        image TEXT NOT NULL,
+        price TEXT NOT NULL,
+        quantity INTEGER NOT NULL,
+        productId TEXT NOT NULL
         )
         ''');
     });
   }
 
   Future<List<CartProductModel>> getAllProducts() async {
-    var dbClient = await database;
-    List<Map> maps = await dbClient.query(tableCartProduct);
+    Database dbClient = await database;
+    List<Map> maps = await dbClient.query('cartProduct');
 
     List<CartProductModel> list = maps.isNotEmpty
-        ? maps
-            .map(
-              (product) => CartProductModel.fromJson(product),
-            )
-            .toList()
+        ? maps.map((product) => CartProductModel.fromJson(product)).toList()
         : [];
     return list;
   }
 
   insert(CartProductModel model) async {
-    var dbClient = await database;
+    Database dbClient = await database;
     await dbClient.insert(
-      tableCartProduct,
+      'cartProduct',
       model.toJson(),
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
   }
 
+  deleteProduct(String productId) async {
+    Database _db = await database;
+    await _db.delete(
+      'cartProduct',
+      where: 'productId = ?',
+      whereArgs: [productId],
+    );
+  }
+
+  deleteAllProducts() async {
+    Database _db = await database;
+    await _db.delete(
+      'cartProduct',
+    );
+  }
+
   updateProduct(CartProductModel model) async {
-    var dbClient = await database;
-    return await dbClient.update(
-      tableCartProduct,
+    Database dbClient = await database;
+    await dbClient.update(
+      'cartProduct',
       model.toJson(),
-      where: '$columnProductId = ?',
+      where: 'productId = ?',
       whereArgs: [model.productId],
     );
   }

@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -9,42 +8,45 @@ import 'package:shop_app_mixin/model/user_model.dart';
 import 'package:shop_app_mixin/view/control_view.dart';
 
 class AuthViewModel extends GetxController {
-  GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email']);
   FirebaseAuth _auth = FirebaseAuth.instance;
 
-  late final String email, password, name;
+  String? email, password, name;
 
-  Rxn<User> _user = Rxn<User>();
-  String? get user => _user.value?.email;
+  Rxn<User>? _user = Rxn<User>();
+  String? get user => _user?.value?.email;
 
-  final LocalStorageData localStorageData = Get.find();
+  // final LocalStorageUser localStorageData = Get.find();
   @override
   void onInit() {
     super.onInit();
-    _user.bindStream(_auth.authStateChanges());
-    if (_auth.currentUser != null) {
-      getCurrrentUserData(_auth.currentUser!.uid);
-    }
+    _user!.bindStream(_auth.authStateChanges());
   }
 
   void googleSignInMethod() async {
-    final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+    try {
+      GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email']);
+      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
 
-    GoogleSignInAuthentication googleSignInAuthentication =
-        await googleUser!.authentication;
+      GoogleSignInAuthentication googleSignInAuthentication =
+          await googleUser!.authentication;
 
-    final AuthCredential credential = GoogleAuthProvider.credential(
-      accessToken: googleSignInAuthentication.accessToken,
-      idToken: googleSignInAuthentication.idToken,
-    );
-    await _auth.signInWithCredential(credential).then(
-      (user) {
+      final AuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleSignInAuthentication.accessToken,
+        idToken: googleSignInAuthentication.idToken,
+      );
+      await _auth.signInWithCredential(credential).then((user) {
         saveUser(user);
-        Get.offAll(
-          () => ControlView(),
-        );
-      },
-    );
+      });
+      Get.offAll(ControlView());
+    } catch (error) {
+      String errorMessage =
+          error.toString().substring(error.toString().indexOf(' ') + 1);
+      Get.snackbar(
+        'Failed to login..',
+        errorMessage,
+        snackPosition: SnackPosition.BOTTOM,
+      );
+    }
   }
 
   void facebookSignInMethod() async {
@@ -66,22 +68,21 @@ class AuthViewModel extends GetxController {
   void signInWithEmailAndPassword() async {
     try {
       await _auth
-          .signInWithEmailAndPassword(
-        email: email,
-        password: password,
-      )
+          .signInWithEmailAndPassword(email: email!, password: password!)
           .then(
-        (value) async {
-          getCurrrentUserData(value.user!.uid);
+        (user) async {
+          FireStoreUser().getCurrentUser(user.user!.uid).then((doc) {
+            setUser(UserModel.fromJson(doc.data() as Map<dynamic, dynamic>));
+          });
         },
       );
       Get.offAll(() => ControlView());
-    } catch (e) {
-      print(e);
+    } catch (error) {
+      String errorMessage =
+          error.toString().substring(error.toString().indexOf(' ') + 1);
       Get.snackbar(
-        'Error Login Account',
-        'Error',
-        colorText: Colors.black,
+        'Failed to login..',
+        errorMessage,
         snackPosition: SnackPosition.BOTTOM,
       );
     }
@@ -91,8 +92,8 @@ class AuthViewModel extends GetxController {
     try {
       await _auth
           .createUserWithEmailAndPassword(
-        email: email,
-        password: password,
+        email: email!,
+        password: password!,
       )
           .then(
         (user) async {
@@ -103,41 +104,55 @@ class AuthViewModel extends GetxController {
       Get.offAll(
         () => ControlView(),
       );
-    } catch (e) {
-      print(e);
+    } catch (error) {
+      String errorMessage =
+          error.toString().substring(error.toString().indexOf(' ') + 1);
       Get.snackbar(
-        'Error Login Account',
-        'Error',
-        colorText: Colors.black,
+        'Failed to login..',
+        errorMessage,
         snackPosition: SnackPosition.BOTTOM,
       );
     }
   }
 
   void saveUser(UserCredential user) async {
-    UserModel userModel = UserModel(
+    UserModel _userModel = UserModel(
       userId: user.user!.uid,
-      email: user.user!.email,
-      name: user.user!.displayName,
-      pic: '',
+      email: user.user!.email!,
+      name: name == null ? user.user!.displayName! : this.name!,
+      pic: user.user!.photoURL == null
+          ? 'default'
+          : user.user!.photoURL! + "?width=400",
     );
-    await FireStoreUser().addUserToFireStore(userModel);
-    setUser(userModel);
+    await FireStoreUser().addUserToFireStore(_userModel);
+    setUser(_userModel);
   }
 
-  void getCurrrentUserData(String uid) async {
-    await FireStoreUser().getCurrentUser(uid).then(
-      (value) {
-        setUser(
-          UserModel.fromJson(
-            value.data() as Map<String, dynamic>,
-          ),
-        );
-      },
-    );
+  // void getCurrrentUserData(String uid) async {
+  //   await FireStoreUser().getCurrentUser(uid).then(
+  //     (value) {
+  //       setUser(
+  //         UserModel.fromJson(
+  //           value.data() as Map<String, dynamic>,
+  //         ),
+  //       );
+  //     },
+  //   );
+  // }
+
+  void singOut() async {
+    try {
+      await _auth.signOut();
+      LocalStorageUser.deleteUser();
+    } catch (e) {
+      print(e);
+    }
+    // GoogleSignIn().signOut();
+    // FirebaseAuth.instance.signOut();
+    // LocalStorageUser.deleteUser();
   }
 
   void setUser(UserModel userModel) async {
-    await localStorageData.setUser(userModel);
+    await LocalStorageUser.setUser(userModel);
   }
 }

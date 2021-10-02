@@ -63,7 +63,7 @@ class LoginScreen extends GetWidget<AuthViewModel> {
                 ),
                 TextFieldContainer(
                   keyboardType: TextInputType.emailAddress,
-                  hintext: 'Email...',
+                  hintText: 'Email...',
                   onSaved: (value) {
                     controller.email = value!;
                   },
@@ -79,7 +79,7 @@ class LoginScreen extends GetWidget<AuthViewModel> {
                 TextFieldContainer(
                   obscureText: true,
                   keyboardType: TextInputType.text,
-                  hintext: 'Password...',
+                  hintText: 'Password...',
                   onSaved: (value) {
                     controller.password = value!;
                   },
@@ -107,8 +107,8 @@ class LoginScreen extends GetWidget<AuthViewModel> {
                   height: 20,
                 ),
                 ValidationButton(
-                  text: 'Login',
-                  onPress: () {
+                   'Login',
+                 () {
                     _formkey.currentState!.save();
                     if (_formkey.currentState!.validate()) {
                       controller.signInWithEmailAndPassword();

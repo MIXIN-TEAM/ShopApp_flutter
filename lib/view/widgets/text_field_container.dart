@@ -4,22 +4,27 @@ import '../../constance.dart';
 
 class TextFieldContainer extends StatelessWidget {
   final bool obscureText;
-  final String hintext;
-  final TextInputType keyboardType;
-  final void Function(String?)? onSaved;
+  final String hintText;
+  final String initialValue;
+  final String? errorText;
+  final TextInputType? keyboardType;
+  final void Function(String?) onSaved;
   final FormFieldValidator<String>? validator;
   const TextFieldContainer({
     Key? key,
-    required this.hintext,
-    this.onSaved,
+    required this.hintText,
+    required this.onSaved,
+    this.obscureText = false,
     this.validator,
-    required this.keyboardType,
-    required this.obscureText,
+    this.keyboardType,
+    this.errorText,
+    this.initialValue = '',
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      initialValue: initialValue,
       obscureText: obscureText,
       onSaved: onSaved,
       validator: validator,
@@ -32,6 +37,7 @@ class TextFieldContainer extends StatelessWidget {
         fontWeight: FontWeight.w600,
       ),
       decoration: InputDecoration(
+        errorText: errorText,
         contentPadding: EdgeInsets.only(
           top: 20,
           bottom: 20,
@@ -47,13 +53,13 @@ class TextFieldContainer extends StatelessWidget {
           ),
         ),
         fillColor: Colors.white,
-        hintText: hintext,
+        hintText: hintText,
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(
             9,
           ),
           borderSide: BorderSide(
-            color: KFormColor,
+            color: Kprimarycolor,
             width: 2,
           ),
         ),
