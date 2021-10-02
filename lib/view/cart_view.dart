@@ -86,7 +86,7 @@ class CartView extends StatelessWidget {
                                       28.r,
                                     ),
                                   ),
-                                  width: 12.w,
+                                  width: 120.h,
                                   height: 120.h,
                                   child: Image.network(
                                     controller.cartProductModel[index].image,
