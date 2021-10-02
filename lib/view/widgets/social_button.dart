@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import '../../constance.dart';
 
@@ -28,26 +29,26 @@ class SocialButton extends StatelessWidget {
           ),
         ),
         minimumSize: Size(
-          180,
-          50,
+          180.w,
+          50.h,
         ),
       ),
       child: Row(
         children: [
           SvgPicture.asset(
             'assets/svg/$social.svg',
-            width: 30,
-            height: 30,
+            width: 30.w,
+            height: 30.h,
           ),
           SizedBox(
-            width: 10,
+            width: 10.w,
           ),
           Text(
             text,
             style: TextStyle(
               color: KtextColor,
               fontWeight: FontWeight.w600,
-              fontSize: 17,
+              fontSize: 17.sp,
             ),
           )
         ],

@@ -20,7 +20,7 @@ class Tile extends StatelessWidget {
       leading: SvgPicture.asset(
         image,
         height: 30.h,
-        width: 30.h,
+        width: 30.w,
       ),
       trailing: text == 'Log Out'
           ? null

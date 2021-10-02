@@ -41,11 +41,11 @@ class CheckoutView extends StatelessWidget {
                   Text(
                     'Checkout',
                     style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 20.sp,
                     ),
                   ),
                   Container(
-                    width: 24,
+                    width: 24.w,
                   ),
                 ],
               ),
@@ -163,7 +163,7 @@ class CheckoutView extends StatelessWidget {
                                         Text(
                                           'Order Submitted',
                                           style: TextStyle(
-                                            fontSize: 24,
+                                            fontSize: 24.sp,
                                             fontWeight: FontWeight.bold,
                                             color: Kprimarycolor,
                                           ),

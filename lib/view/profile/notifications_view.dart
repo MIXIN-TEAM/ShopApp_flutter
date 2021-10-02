@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:shop_app_mixin/constance.dart';
 
@@ -18,7 +19,7 @@ class NotificationsView extends StatelessWidget {
         title: Text(
           'Cards',
           style: TextStyle(
-            fontSize: 20,
+            fontSize: 20.sp,
             fontWeight: FontWeight.w600,
             color: Kprimarycolor,
           ),
@@ -29,7 +30,7 @@ class NotificationsView extends StatelessWidget {
           'You don\'t have notifications right now.',
           style: TextStyle(
             fontWeight: FontWeight.w600,
-            fontSize: 16,
+            fontSize: 16.sp,
             color: Colors.black54,
           ),
         ),

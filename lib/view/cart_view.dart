@@ -28,16 +28,16 @@ class CartView extends StatelessWidget {
                     children: [
                       SvgPicture.asset(
                         'assets/svg/empty.svg',
-                        height: 250,
-                        width: 250,
+                        height: 250.h,
+                        width: 250.w,
                       ),
                       SizedBox(
-                        height: 20,
+                        height: 20.h,
                       ),
                       Text(
                         'Empty cart',
                         style: TextStyle(
-                          fontSize: 25,
+                          fontSize: 25.sp,
                           fontWeight: FontWeight.w600,
                           color: Kprimarycolor,
                         ),
@@ -83,11 +83,11 @@ class CartView extends StatelessWidget {
                                   decoration: BoxDecoration(
                                     color: Colors.white,
                                     borderRadius: BorderRadius.circular(
-                                      28,
+                                      28.r,
                                     ),
                                   ),
-                                  width: 120,
-                                  height: 120,
+                                  width: 12.w,
+                                  height: 120.h,
                                   child: Image.network(
                                     controller.cartProductModel[index].image,
                                     fit: BoxFit.contain,
@@ -95,7 +95,7 @@ class CartView extends StatelessWidget {
                                 ),
                                 Padding(
                                   padding: EdgeInsets.only(
-                                    left: 10,
+                                    left: 10.w,
                                   ),
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.start,
@@ -111,7 +111,7 @@ class CartView extends StatelessWidget {
                                           overflow: TextOverflow.ellipsis,
                                           maxLines: 1,
                                           style: TextStyle(
-                                            fontSize: 20,
+                                            fontSize: 20.sp,
                                             fontWeight: FontWeight.w600,
                                             color: Ksecondarycolor,
                                           ),
@@ -127,19 +127,19 @@ class CartView extends StatelessWidget {
                                         style: TextStyle(
                                           color: Kprimarycolor,
                                           fontWeight: FontWeight.w600,
-                                          fontSize: 17,
+                                          fontSize: 17.sp,
                                         ),
                                       ),
                                       SizedBox(
-                                        height: 10,
+                                        height: 10.h,
                                       ),
                                       Container(
-                                        width: 100,
-                                        height: 26,
+                                        width: 100.w,
+                                        height: 26.h,
                                         decoration: BoxDecoration(
                                           color: Colors.white,
                                           borderRadius:
-                                              BorderRadius.circular(10),
+                                              BorderRadius.circular(10.r),
                                         ),
                                         child: Row(
                                           mainAxisAlignment:
@@ -158,7 +158,7 @@ class CartView extends StatelessWidget {
                                               ),
                                             ),
                                             SizedBox(
-                                              width: 10,
+                                              width: 10.w,
                                             ),
                                             Text(
                                               controller.cartProductModel[index]
@@ -169,7 +169,7 @@ class CartView extends StatelessWidget {
                                               ),
                                             ),
                                             SizedBox(
-                                              width: 10,
+                                              width: 10.w,
                                             ),
                                             GestureDetector(
                                               onTap: () {
@@ -212,7 +212,7 @@ class CartView extends StatelessWidget {
                               Text(
                                 'Total:',
                                 style: TextStyle(
-                                  fontSize: 22,
+                                  fontSize: 22.sp,
                                   fontWeight: FontWeight.w600,
                                   color: Colors.grey,
                                 ),
@@ -223,7 +223,7 @@ class CartView extends StatelessWidget {
                                 builder: (controller) => Text(
                                   '${controller.totalPrice} DZD',
                                   style: TextStyle(
-                                    fontSize: 22,
+                                    fontSize: 22.sp,
                                     fontWeight: FontWeight.w600,
                                     color: Kprimarycolor,
                                   ),

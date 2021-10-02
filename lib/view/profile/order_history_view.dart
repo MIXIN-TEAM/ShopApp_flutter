@@ -36,13 +36,13 @@ class OrderHistoryView extends StatelessWidget {
                   Text(
                     'Order History',
                     style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 20.sp,
                       fontWeight: FontWeight.w600,
                       color: Kprimarycolor,
                     ),
                   ),
                   Container(
-                    width: 24,
+                    width: 24.w,
                   ),
                 ],
               ),
@@ -114,7 +114,7 @@ class OrderHistoryView extends StatelessWidget {
                                     ),
                                   ),
                                   Text(
-                                    '\$${controller.checkouts[index].totalPrice}',
+                                    'DZD${controller.checkouts[index].totalPrice}',
                                     style: TextStyle(
                                       color: Kprimarycolor,
                                     ),

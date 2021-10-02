@@ -3,9 +3,6 @@ import 'package:shop_app_mixin/core/services/database/local_database_cart.dart';
 import 'package:shop_app_mixin/model/cart_product_model.dart';
 
 class CartViewModel extends GetxController {
-  // ValueNotifier<bool> get loading => _loading;
-
-  // ValueNotifier<bool> _loading = ValueNotifier(false);
 
   List<CartProductModel> _cartProductModel = [];
 

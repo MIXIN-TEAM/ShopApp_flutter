@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../constance.dart';
 
 class TextFieldContainer extends StatelessWidget {
@@ -39,28 +40,28 @@ class TextFieldContainer extends StatelessWidget {
       decoration: InputDecoration(
         errorText: errorText,
         contentPadding: EdgeInsets.only(
-          top: 20,
-          bottom: 20,
-          left: 20,
+          top: 20.h,
+          bottom: 20.h,
+          left: 20.w,
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(
-            9,
+            9.r,
           ),
           borderSide: BorderSide(
             color: KFormColor,
-            width: 2,
+            width: 2.w,
           ),
         ),
         fillColor: Colors.white,
         hintText: hintText,
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(
-            9,
+            9.r,
           ),
           borderSide: BorderSide(
             color: Kprimarycolor,
-            width: 2,
+            width: 2.w,
           ),
         ),
       ),

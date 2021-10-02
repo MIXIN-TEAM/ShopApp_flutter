@@ -14,6 +14,7 @@ class CategoryProductsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xFFEEEEEE),
       body: Column(
         children: [
           Container(
@@ -39,15 +40,17 @@ class CategoryProductsView extends StatelessWidget {
                       color: Colors.black,
                     ),
                   ),
-                  Text(
-                    categoryName,
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
+                  Container(
+                    child: Text(
+                      categoryName,
+                      style: TextStyle(
+                        fontSize: 20.sp,
+                      ),
                     ),
+                    alignment: Alignment.bottomCenter,
                   ),
                   Container(
-                    width: 24,
+                    width: 24.w,
                   ),
                 ],
               ),
@@ -55,7 +58,11 @@ class CategoryProductsView extends StatelessWidget {
           ),
           Expanded(
             child: Padding(
-              padding: EdgeInsets.only(right: 16.w, left: 16.w, bottom: 24.h),
+              padding: EdgeInsets.only(
+                right: 16.w,
+                left: 16.w,
+                bottom: 24.h,
+              ),
               child: GridView.builder(
                 padding: const EdgeInsets.all(0),
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -80,37 +87,35 @@ class CategoryProductsView extends StatelessWidget {
                         children: [
                           Container(
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(4.r),
+                              borderRadius: BorderRadius.circular(25.r),
                               color: Colors.white,
                             ),
                             height: 240.h,
                             width: 164.w,
                             child: Image.network(
                               products[index].image,
-                              fit: BoxFit.cover,
+                              fit: BoxFit.contain,
                             ),
                           ),
                           Text(
                             products[index].name,
                             style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
+                              fontSize: 16.sp,
                             ),
                           ),
                           Text(
                             products[index].description,
                             style: TextStyle(
-                              fontSize: 12,
+                              fontSize: 12.sp,
                               color: Colors.grey,
                             ),
                             maxLines: 1,
                           ),
                           Text(
-                            '\DZD ${products[index].price}',
+                            'DZD${products[index].price}',
                             style: TextStyle(
-                              fontSize: 16,
+                              fontSize: 16.sp,
                               color: Kprimarycolor,
-                              fontWeight: FontWeight.w600,
                             ),
                           ),
                         ],

@@ -4,7 +4,7 @@
      
 
    <application
-        android:label="shop_app_mixin"
+        android:label="Sadji ShopApp"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

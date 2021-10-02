@@ -48,7 +48,7 @@ class _SearchViewState extends State<SearchView> {
         title: Text(
           'Search',
           style: TextStyle(
-            fontSize: 20,
+            fontSize: 20.sp,
             fontWeight: FontWeight.w600,
             color: Kprimarycolor,
           ),

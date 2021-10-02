@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:shop_app_mixin/constance.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -25,7 +26,7 @@ class LoginScreen extends GetWidget<AuthViewModel> {
         ),
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 50),
+        padding: EdgeInsets.symmetric(horizontal: 50.h),
         child: SingleChildScrollView(
           child: Form(
             key: _formkey,
@@ -42,7 +43,7 @@ class LoginScreen extends GetWidget<AuthViewModel> {
                   "LOGIN",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 31,
+                    fontSize: 31.sp,
                     letterSpacing: -2,
                     color: Kprimarycolor,
                   ),
@@ -53,13 +54,13 @@ class LoginScreen extends GetWidget<AuthViewModel> {
                 Text(
                   'Login to continue',
                   style: TextStyle(
-                    fontSize: 12,
+                    fontSize: 12.sp,
                     fontWeight: FontWeight.bold,
                     color: Kprimarycolor,
                   ),
                 ),
                 SizedBox(
-                  height: 20,
+                  height: 20.h,
                 ),
                 TextFieldContainer(
                   keyboardType: TextInputType.emailAddress,
@@ -74,7 +75,7 @@ class LoginScreen extends GetWidget<AuthViewModel> {
                   }, obscureText: false,
                 ),
                 SizedBox(
-                  height: 11,
+                  height: 11.h,
                 ),
                 TextFieldContainer(
                   obscureText: true,
@@ -90,7 +91,7 @@ class LoginScreen extends GetWidget<AuthViewModel> {
                   },
                 ),
                 SizedBox(
-                  height: 15,
+                  height: 15.h,
                 ),
                 Align(
                   alignment: Alignment.bottomRight,
@@ -99,12 +100,12 @@ class LoginScreen extends GetWidget<AuthViewModel> {
                     style: TextStyle(
                       fontWeight: FontWeight.w600,
                       color: KtextColor,
-                      fontSize: 14,
+                      fontSize: 14.sp,
                     ),
                   ),
                 ),
                 SizedBox(
-                  height: 20,
+                  height: 20.h,
                 ),
                 ValidationButton(
                    'Login',

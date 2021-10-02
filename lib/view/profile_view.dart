@@ -57,7 +57,7 @@ class ProfileView extends StatelessWidget {
                                 Text(
                                   controller.currentUser!.name,
                                   style: TextStyle(
-                                    fontSize: 20,
+                                    fontSize: 20.sp,
                                     fontWeight: FontWeight.w600,
                                     color: Ksecondarycolor,
                                   ),
@@ -68,7 +68,7 @@ class ProfileView extends StatelessWidget {
                                 Text(
                                   controller.currentUser!.email,
                                   style: TextStyle(
-                                    fontSize: 15,
+                                    fontSize: 15.sp,
                                     fontWeight: FontWeight.w600,
                                     color: Ksecondarycolor,
                                   ),
@@ -79,16 +79,12 @@ class ProfileView extends StatelessWidget {
                         ),
                       ),
                       SizedBox(
-                        height: 50,
+                        height: 50.h,
                       ),
                       Tile(
                         image: 'assets/svg/edit.svg',
                         text: 'Edit Profile',
                         onPressed: () => Get.to(() => EditProfileView()),
-                      ),
-                      Tile(
-                        image: 'assets/svg/location.svg',
-                        text: 'Shipping Address',
                       ),
                       Tile(
                         image: 'assets/svg/history.svg',

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:shop_app_mixin/constance.dart';
 import 'package:shop_app_mixin/core/viewmodel/auth_view_model.dart';
@@ -13,7 +14,7 @@ class RegisterScreen extends GetWidget<AuthViewModel> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.transparent,
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios_new_sharp),
           color: Kprimarycolor,
@@ -24,7 +25,7 @@ class RegisterScreen extends GetWidget<AuthViewModel> {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 50),
+          padding: EdgeInsets.symmetric(horizontal: 50.h),
           child: Form(
             key: _formkey,
             child: Column(
@@ -35,7 +36,7 @@ class RegisterScreen extends GetWidget<AuthViewModel> {
                   'Create Account',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 32,
+                    fontSize: 32.sp,
                     color: Kprimarycolor,
                   ),
                 ),
@@ -43,22 +44,22 @@ class RegisterScreen extends GetWidget<AuthViewModel> {
                   'Let\'s create your profile',
                   style: TextStyle(
                     color: Kprimarycolor,
-                    fontSize: 15,
+                    fontSize: 15.sp,
                   ),
                 ),
                 SizedBox(
-                  height: 40,
+                  height: 40.h,
                 ),
                 Text(
                   'With email address',
                   style: TextStyle(
                     color: Kprimarycolor,
                     fontWeight: FontWeight.w600,
-                    fontSize: 19,
+                    fontSize: 19.sp,
                   ),
                 ),
                 SizedBox(
-                  height: 10,
+                  height: 10.h,
                 ),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -72,7 +73,7 @@ class RegisterScreen extends GetWidget<AuthViewModel> {
                       obscureText: false,
                     ),
                     SizedBox(
-                      height: 25,
+                      height: 25.h,
                     ),
                     TextFieldContainer(
                       hintText: 'Email',
@@ -88,7 +89,7 @@ class RegisterScreen extends GetWidget<AuthViewModel> {
                       obscureText: false,
                     ),
                     SizedBox(
-                      height: 25,
+                      height: 25.h,
                     ),
                     TextFieldContainer(
                       hintText: 'Password',
@@ -104,7 +105,7 @@ class RegisterScreen extends GetWidget<AuthViewModel> {
                       obscureText: true,
                     ),
                     SizedBox(
-                      height: 25,
+                      height: 25.h,
                     ),
                     TextFieldContainer(
                       hintText: 'Confirm Password',
@@ -120,7 +121,7 @@ class RegisterScreen extends GetWidget<AuthViewModel> {
                       obscureText: true,
                     ),
                     SizedBox(
-                      height: 10,
+                      height: 10.h,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
@@ -130,13 +131,13 @@ class RegisterScreen extends GetWidget<AuthViewModel> {
                           style: TextStyle(
                             color: Kprimarycolor,
                             fontWeight: FontWeight.w600,
-                            fontSize: 14,
+                            fontSize: 14.sp,
                           ),
                         ),
                       ],
                     ),
                     SizedBox(
-                      height: 20,
+                      height: 20.h,
                     ),
                     ValidationButton(
                       'Sign up',

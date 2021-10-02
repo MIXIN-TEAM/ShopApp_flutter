@@ -111,7 +111,7 @@ class NoInternetConnection extends StatelessWidget {
             Text(
               'Please check your internet connection..',
               style: TextStyle(
-                fontSize: 14,
+                fontSize: 14.sp,
                 fontWeight: FontWeight.w600,
               ),
             ),

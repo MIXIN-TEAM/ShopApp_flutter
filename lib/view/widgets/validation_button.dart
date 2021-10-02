@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../constance.dart';
 
@@ -18,24 +19,24 @@ class ValidationButton extends StatelessWidget {
         alignment: Alignment.center,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(
-            9,
+            9.r,
           ),
         ),
         maximumSize: Size(
-          180,
-          50,
+          180.w,
+          50.h,
         ),
       ),
       onPressed: onPress,
       child: Padding(
         padding: EdgeInsets.symmetric(
-          vertical: 11,
+          vertical: 11.w,
           horizontal: MediaQuery.of(context).size.width * 0.1,
         ),
         child: Text(
           text!,
           style: TextStyle(
-            fontSize: 20,
+            fontSize: 20.sp,
             fontWeight: FontWeight.w600,
           ),
         ),

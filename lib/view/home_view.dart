@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:shop_app_mixin/constance.dart';
 import 'package:shop_app_mixin/core/viewmodel/home_view_model.dart';
-import 'package:shop_app_mixin/view/categories_products_view.dart';
+import 'package:shop_app_mixin/view/category_products_view.dart';
 import 'package:shop_app_mixin/view/details_view.dart';
 import 'package:shop_app_mixin/view/search_view.dart';
 
@@ -62,21 +62,21 @@ class HomeView extends StatelessWidget {
                             fontWeight: FontWeight.w600,
                           ),
                         ),
-                        // GestureDetector(
-                        //   onTap: () {
-                        //     Get.to(
-                        //       CategoryProductsView(
-                        //         categoryName: 'Best Selling',
-                        //         products: controller.productModel,
-                        //       ),
-                        //     );
-                        //   },
-                        // ),
-                        Text(
-                          'See all',
-                          style: TextStyle(
-                            fontSize: 19.sp,
-                            fontWeight: FontWeight.w600,
+                        GestureDetector(
+                          onTap: () {
+                            Get.to(
+                              CategoryProductsView(
+                                categoryName: 'Best Selling',
+                                products: controller.productModel,
+                              ),
+                            );
+                          },
+                          child: Text(
+                            'See all',
+                            style: TextStyle(
+                              fontSize: 19.sp,
+                              fontWeight: FontWeight.w600,
+                            ),
                           ),
                         ),
                       ],
@@ -157,9 +157,6 @@ class HomeView extends StatelessWidget {
                       ),
                     ),
                   ),
-                  // SizedBox(
-                  //   height: 5,
-                  // ),
                   Text(
                     controller.categoryModel[index].name,
                     style: TextStyle(

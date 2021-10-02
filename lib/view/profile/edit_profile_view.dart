@@ -52,12 +52,12 @@ class _EditProfileViewState extends State<EditProfileView> {
                   Text(
                     'Edit Profile',
                     style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 20.sp,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
                   Container(
-                    width: 24,
+                    width: 24.w,
                   ),
                 ],
               ),
@@ -97,7 +97,7 @@ class _EditProfileViewState extends State<EditProfileView> {
                                       ? 'You\'re logged in using Google account!'
                                       : 'You\'re logged in using Facebook account!',
                                   style: TextStyle(
-                                    fontSize: 16,
+                                    fontSize: 16.sp,
                                     fontWeight: FontWeight.w600,
                                   ),
                                 ),
@@ -128,7 +128,7 @@ class _EditProfileViewState extends State<EditProfileView> {
                                               title: Text(
                                                 'Choose option',
                                                 style: TextStyle(
-                                                  fontSize: 20,
+                                                  fontSize: 20.sp,
                                                   color: Colors.blue,
                                                 ),
                                               ),
@@ -136,7 +136,7 @@ class _EditProfileViewState extends State<EditProfileView> {
                                                 mainAxisSize: MainAxisSize.min,
                                                 children: [
                                                   Divider(
-                                                    height: 1,
+                                                    height: 1.h,
                                                   ),
                                                   ListTile(
                                                     onTap: () async {
@@ -157,7 +157,7 @@ class _EditProfileViewState extends State<EditProfileView> {
                                                     ),
                                                   ),
                                                   Divider(
-                                                    height: 1,
+                                                    height: 1.h,
                                                   ),
                                                   ListTile(
                                                     onTap: () async {

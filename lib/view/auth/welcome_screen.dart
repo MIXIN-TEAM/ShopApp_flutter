@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:shop_app_mixin/core/viewmodel/auth_view_model.dart';
 import 'package:shop_app_mixin/view/auth/login_screen%20.dart';
@@ -24,7 +25,7 @@ class WelcomScreen extends GetWidget<AuthViewModel> {
           backgroundColor: Colors.transparent,
           body: Center(
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 50),
+              padding: EdgeInsets.symmetric(horizontal: 50.h),
               child: SingleChildScrollView(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -34,7 +35,7 @@ class WelcomScreen extends GetWidget<AuthViewModel> {
                       'Shop',
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 53,
+                        fontSize: 53.sp,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -42,7 +43,7 @@ class WelcomScreen extends GetWidget<AuthViewModel> {
                       'discover your world',
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 16,
+                        fontSize: 16.sp,
                         fontWeight: FontWeight.normal,
                       ),
                     ),
@@ -50,12 +51,12 @@ class WelcomScreen extends GetWidget<AuthViewModel> {
                       'Welcome to shop!',
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 29,
+                        fontSize: 29.sp,
                         fontWeight: FontWeight.w800,
                       ),
                     ),
                     SizedBox(
-                      height: 50,
+                      height: 50.h,
                     ),
                     SocialButton(
                       social: 'google',
@@ -65,7 +66,7 @@ class WelcomScreen extends GetWidget<AuthViewModel> {
                       },
                     ),
                     SizedBox(
-                      height: 35,
+                      height: 35.h,
                     ),
                     SocialButton(
                       social: 'facebook',
@@ -75,7 +76,7 @@ class WelcomScreen extends GetWidget<AuthViewModel> {
                       },
                     ),
                     SizedBox(
-                      height: 20,
+                      height: 20.h,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -84,11 +85,11 @@ class WelcomScreen extends GetWidget<AuthViewModel> {
                         Expanded(
                           child: Divider(
                             color: Colors.white,
-                            height: 10,
+                            height: 10.h,
                           ),
                         ),
                         SizedBox(
-                          width: 10,
+                          width: 10.w,
                         ),
                         Text(
                           'or',
@@ -97,19 +98,19 @@ class WelcomScreen extends GetWidget<AuthViewModel> {
                           ),
                         ),
                         SizedBox(
-                          width: 10,
+                          width: 10.w,
                         ),
                         Expanded(
                           child: Divider(
                             color: Colors.white,
-                            height: 10,
+                            height: 10.h,
                             endIndent: 1,
                           ),
                         ),
                       ],
                     ),
                     SizedBox(
-                      height: 30,
+                      height: 30.h,
                     ),
                     TextButton(
                       onPressed: () {
@@ -120,12 +121,12 @@ class WelcomScreen extends GetWidget<AuthViewModel> {
                       style: TextButton.styleFrom(
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(
-                            9,
+                            9.r,
                           ),
                         ),
                         minimumSize: Size(
-                          180,
-                          50,
+                          180.w,
+                          50.h,
                         ),
                         side: BorderSide(
                           color: Colors.white,
@@ -139,32 +140,32 @@ class WelcomScreen extends GetWidget<AuthViewModel> {
                             color: Colors.white,
                           ),
                           SizedBox(
-                            width: 10,
+                            width: 10.w,
                           ),
                           Text(
                             'Create a new account',
                             style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.w600,
-                              fontSize: 17,
+                              fontSize: 17.sp,
                             ),
                           )
                         ],
                       ),
                     ),
                     SizedBox(
-                      height: 13,
+                      height: 13.h,
                     ),
                     Text(
                       'already have an account',
                       style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.w600,
-                        fontSize: 20,
+                        fontSize: 20.sp,
                       ),
                     ),
                     SizedBox(
-                      height: 10,
+                      height: 10.h,
                     ),
                     GestureDetector(
                       onTap: () {
@@ -177,7 +178,7 @@ class WelcomScreen extends GetWidget<AuthViewModel> {
                         style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.w600,
-                          fontSize: 20,
+                          fontSize: 20.sp,
                           decoration: TextDecoration.underline,
                         ),
                       ),
